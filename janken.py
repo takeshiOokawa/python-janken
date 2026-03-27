@@ -83,6 +83,17 @@ def play_again():
         print("「y」か「n」を入力してください。")
 
 
+def show_score(score):
+    """ゲーム終了時にスコアサマリーを表示する。"""
+    total = sum(score.values())
+    win_rate = score["勝ち"] / total * 100 if total > 0 else 0.0
+    print("========== ゲーム終了 ==========")
+    print(f"総対戦数: {total}回")
+    print(f"勝ち: {score['勝ち']}回 / 負け: {score['負け']}回 / あいこ: {score['あいこ']}回")
+    print(f"勝率: {win_rate:.1f}%")
+    print("================================")
+
+
 def main():
     """ゲームのメインループ。"""
     score = {"勝ち": 0, "負け": 0, "あいこ": 0}
@@ -97,6 +108,7 @@ def main():
                 break
     except KeyboardInterrupt:
         print()
+    show_score(score)
     print("ゲームを終了します。")
 
 

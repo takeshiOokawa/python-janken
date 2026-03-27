@@ -44,3 +44,35 @@ def show_result(player, cpu, result):
     print(f"CPUの手:    {cpu}")
     print(f"結果: {result}")
     print("---")
+
+
+def play_again():
+    """もう一度プレイするか確認する。y なら True、n なら False を返す。"""
+    while True:
+        ans = input("もう一度プレイしますか？ (y/n): ").strip().lower()
+        if ans == "y":
+            return True
+        elif ans == "n":
+            return False
+        print("「y」か「n」を入力してください。")
+
+
+def main():
+    """ゲームのメインループ。"""
+    while True:
+        player = get_player_choice()
+        cpu = random.choice(CHOICES)
+        if player == cpu:
+            result = "あいこ"
+        elif (player == GUU and cpu == CHOKI) or (player == CHOKI and cpu == PAA) or (player == PAA and cpu == GUU):
+            result = "勝ち"
+        else:
+            result = "負け"
+        show_result(player, cpu, result)
+        if not play_again():
+            print("ゲームを終了します。")
+            break
+
+
+if __name__ == "__main__":
+    main()

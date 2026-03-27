@@ -70,3 +70,33 @@ def show_result(player, cpu, result):
     print(f"CPUの手:    {cpu}")
     print(f"結果: {result}")
     print("---")
+
+
+def play_again():
+    """もう一度プレイするか確認する。y なら True、n なら False を返す。"""
+    while True:
+        ans = input("もう一度プレイしますか？ (y/n): ").strip().lower()
+        if ans == "y":
+            return True
+        elif ans == "n":
+            return False
+        print("「y」か「n」を入力してください。")
+
+
+def main():
+    """ゲームのメインループ。"""
+    try:
+        while True:
+            player = get_player_choice()
+            cpu = get_cpu_choice()
+            result = judge(player, cpu)
+            show_result(player, cpu, result)
+            if not play_again():
+                break
+    except KeyboardInterrupt:
+        print()
+    print("ゲームを終了します。")
+
+
+if __name__ == "__main__":
+    main()

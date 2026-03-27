@@ -85,12 +85,14 @@ def play_again():
 
 def main():
     """ゲームのメインループ。"""
+    score = {"勝ち": 0, "負け": 0, "あいこ": 0}
     try:
         while True:
             player = get_player_choice()
             cpu = get_cpu_choice()
             result = judge(player, cpu)
             show_result(player, cpu, result)
+            score[result] += 1
             if not play_again():
                 break
     except KeyboardInterrupt:

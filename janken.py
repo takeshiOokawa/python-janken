@@ -37,6 +37,32 @@ def get_player_choice():
         print(f"「{raw}」は無効な入力です。グー/チョキ/パー または 1/2/3 を入力してください。")
 
 
+def get_cpu_choice():
+    """CPUの手をランダムに選んで返す。"""
+    return random.choice(CHOICES)
+
+
+# 勝ち判定マップ: プレイヤーの手 -> プレイヤーが勝てるCPUの手
+WINS_AGAINST = {
+    GUU: CHOKI,
+    CHOKI: PAA,
+    PAA: GUU,
+}
+
+
+def judge(player, cpu):
+    """プレイヤーとCPUの手を比較して勝敗を返す。
+
+    Returns:
+        "勝ち" / "負け" / "あいこ"
+    """
+    if player == cpu:
+        return "あいこ"
+    if WINS_AGAINST[player] == cpu:
+        return "勝ち"
+    return "負け"
+
+
 def show_result(player, cpu, result):
     """プレイヤーの手・CPUの手・勝敗結果を表示する。"""
     print("---")
@@ -44,3 +70,30 @@ def show_result(player, cpu, result):
     print(f"CPUの手:    {cpu}")
     print(f"結果: {result}")
     print("---")
+
+
+def play_again():
+    """もう一度プレイするか確認する。y なら True、n なら False を返す。"""
+    while True:
+        ans = input("もう一度プレイしますか？ (y/n): ").strip().lower()
+        if ans == "y":
+            return True
+        elif ans == "n":
+            return False
+        print("「y」か「n」を入力してください。")
+
+
+def main():
+    """ゲームのメインループ。"""
+    while True:
+        player = get_player_choice()
+        cpu = get_cpu_choice()
+        result = judge(player, cpu)
+        show_result(player, cpu, result)
+        if not play_again():
+            print("ゲームを終了します。")
+            break
+
+
+if __name__ == "__main__":
+    main()

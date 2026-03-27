@@ -7,6 +7,11 @@ PAA = "パー"
 
 CHOICES = [GUU, CHOKI, PAA]
 
+# 勝敗結果の定数
+WIN = "勝ち"
+LOSE = "負け"
+DRAW = "あいこ"
+
 # 入力値と手のマッピング（数字・ひらがな・カタカナ対応）
 INPUT_MAP = {
     "1": GUU,
@@ -57,10 +62,10 @@ def judge(player, cpu):
         "勝ち" / "負け" / "あいこ"
     """
     if player == cpu:
-        return "あいこ"
+        return DRAW
     if WINS_AGAINST[player] == cpu:
-        return "勝ち"
-    return "負け"
+        return WIN
+    return LOSE
 
 
 def show_result(player, cpu, result):
@@ -86,17 +91,17 @@ def play_again():
 def show_score(score):
     """ゲーム終了時にスコアサマリーを表示する。"""
     total = sum(score.values())
-    win_rate = score["勝ち"] / total * 100 if total > 0 else 0.0
+    win_rate = score[WIN] / total * 100 if total > 0 else 0.0
     print("========== ゲーム終了 ==========")
     print(f"総対戦数: {total}回")
-    print(f"勝ち: {score['勝ち']}回 / 負け: {score['負け']}回 / あいこ: {score['あいこ']}回")
+    print(f"勝ち: {score[WIN]}回 / 負け: {score[LOSE]}回 / あいこ: {score[DRAW]}回")
     print(f"勝率: {win_rate:.1f}%")
     print("================================")
 
 
 def main():
     """ゲームのメインループ。"""
-    score = {"勝ち": 0, "負け": 0, "あいこ": 0}
+    score = {WIN: 0, LOSE: 0, DRAW: 0}
     try:
         while True:
             player = get_player_choice()

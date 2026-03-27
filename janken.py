@@ -37,22 +37,10 @@ def get_player_choice():
         print(f"「{raw}」は無効な入力です。グー/チョキ/パー または 1/2/3 を入力してください。")
 
 
-# 勝ち判定マップ: プレイヤーの手 -> プレイヤーが勝てるCPUの手
-WINS_AGAINST = {
-    GUU: CHOKI,
-    CHOKI: PAA,
-    PAA: GUU,
-}
-
-
-def judge(player, cpu):
-    """プレイヤーとCPUの手を比較して勝敗を返す。
-
-    Returns:
-        "勝ち" / "負け" / "あいこ"
-    """
-    if player == cpu:
-        return "あいこ"
-    if WINS_AGAINST[player] == cpu:
-        return "勝ち"
-    return "負け"
+def show_result(player, cpu, result):
+    """プレイヤーの手・CPUの手・勝敗結果を表示する。"""
+    print("---")
+    print(f"あなたの手: {player}")
+    print(f"CPUの手:    {cpu}")
+    print(f"結果: {result}")
+    print("---")

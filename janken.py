@@ -35,3 +35,12 @@ def get_player_choice():
         if choice:
             return choice
         print(f"「{raw}」は無効な入力です。グー/チョキ/パー または 1/2/3 を入力してください。")
+
+
+def show_result(player, cpu, result):
+    """プレイヤーの手・CPUの手・勝敗結果を表示する。"""
+    print("---")
+    print(f"あなたの手: {player}")
+    print(f"CPUの手:    {cpu}")
+    print(f"結果: {result}")
+    print("---")

@@ -35,3 +35,10 @@ def get_player_choice():
         if choice:
             return choice
         print(f"「{raw}」は無効な入力です。グー/チョキ/パー または 1/2/3 を入力してください。")
+
+
+def get_cpu_choice():
+    """CPUの手をランダムに選んで返す。"""
+    choice = random.choice(CHOICES)
+    print(f"CPUの手: {choice}")
+    return choice

@@ -85,14 +85,17 @@ def play_again():
 
 def main():
     """ゲームのメインループ。"""
-    while True:
-        player = get_player_choice()
-        cpu = get_cpu_choice()
-        result = judge(player, cpu)
-        show_result(player, cpu, result)
-        if not play_again():
-            print("ゲームを終了します。")
-            break
+    try:
+        while True:
+            player = get_player_choice()
+            cpu = get_cpu_choice()
+            result = judge(player, cpu)
+            show_result(player, cpu, result)
+            if not play_again():
+                break
+    except KeyboardInterrupt:
+        print()
+    print("ゲームを終了します。")
 
 
 if __name__ == "__main__":
